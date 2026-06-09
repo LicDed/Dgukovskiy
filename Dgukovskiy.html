@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+   <title>Творчество В.А. Жуковского</title>
+   <style>
+      * {margin: 0; padding: 0; box-sizing: border-box;}
+      body {
+         background-color: #f5efe6;
+         background-image: url('back2.jpg');
+         background-size: cover;
+         background-position: center;
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+         font-family: Georgia, "Times New Roman", serif;
+         color: #2c2c2c;
+         display: flex;
+         justify-content: center;
+      }
+      .container { width: 100%; max-width: 1200px; padding: 20px; }
+
+      header {
+         background: #e8e2d7;
+         padding: 25px 40px;
+         display: flex; justify-content: space-between; align-items: center;
+         border-bottom: 2px solid #bfa88d;
+         margin-bottom: 30px;
+         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+         flex-wrap: wrap;
+         gap: 15px;
+      }
+      .logo {font-size: 24px; font-weight: bold; letter-spacing: 2px; color: #5a4e3c;}
+      nav {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 5px;
+      }
+      nav a {
+         margin-left: 20px;
+         text-decoration: none;
+         color: #4a4032;
+         font-size: 15px;
+         border-bottom: 1px solid transparent;
+         transition: 0.3s;
+         cursor: pointer;
+         white-space: nowrap;
+      }
+      nav a:hover, nav a.active {border-bottom: 2px solid #a37c5b;}
+
+      .hero {
+         background: #dcd3c7;
+         height: 160px;
+         display: flex; align-items: center; justify-content: center;
+         margin-bottom: 40px;
+         border-radius: 12px;
+         box-shadow: inset 0 0 0 1px #d0c2b0;
+      }
+      .hero h1 {
+         font-size: 28px; 
+         font-weight: normal; 
+         letter-spacing: 1px; 
+         color: #3d342a;
+         text-align: center;
+         line-height: 1.35;
+      }
+
+      .row {display: flex; margin-bottom: 40px; gap: 30px; flex-wrap: wrap;}
+      .card {
+         flex: 1;
+         min-width: 200px;
+         background: #e8e0d4;
+         padding: 32px 25px;
+         border-radius: 12px;
+         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+         border-left: 4px solid #baa68b;
+         min-height: 180px;
+         display: flex; flex-direction: column; justify-content: center;
+         text-align: center;
+         transition: all 0.3s ease;
+         cursor: pointer;
+      }
+      .card:hover {transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);}
+      .card h3 { margin-bottom: 14px; font-weight: normal; font-size: 21px; color: #3d342a; }
+      .card p {font-size: 14.5px; color: #444; line-height: 1.5;}
+
+      .section-block, .fact-block, .quiz-block {
+         background: #e8e0d4;
+         padding: 35px 45px;
+         border-radius: 12px;
+         margin-bottom: 25px;
+         border: 1px solid #dacfc0;
+      }
+      .section-block h2 {
+         padding-top: 12px;
+         margin-top: 6px;
+      }
+
+      /* Стиль для кликабельного блока викторины */
+      .quiz-clickable {
+         background: #e8e0d4;
+         padding: 35px 45px;
+         border-radius: 12px;
+         margin-bottom: 25px;
+         border: 1px solid #dacfc0;
+         border-left: 4px solid #baa68b;
+         cursor: pointer;
+         transition: all 0.3s ease;
+      }
+      .quiz-clickable:hover {
+         transform: translateY(-8px);
+         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+      }
+      .quiz-clickable h2 {
+         padding-top: 12px;
+         margin-top: 6px;
+         margin-bottom: 14px;
+         font-weight: normal;
+         font-size: 21px;
+         color: #3d342a;
+         text-align: center;
+      }
+      .quiz-clickable p {
+         font-size: 14.5px;
+         color: #444;
+         line-height: 1.5;
+         text-align: center;
+      }
+
+      .fact-block {
+         background: #dcd3c7;
+         border-left: 5px solid #a37c5b;
+         padding: 25px 35px;
+      }
+      .facts-container {
+         position: relative;
+         min-height: 110px;
+         font-size: 18px;
+         line-height: 1.75;
+         color: #2c2c2c;
+         text-align: center;
+         font-style: italic;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+      }
+      .fact-item {display: none; width: 100%;}
+      .fact-item.active {display: block;}
+      .fact-nav {
+         display: flex;
+         justify-content: space-between;
+         margin-top: 18px;
+         font-size: 28px;
+         color: #a37c5b;
+         user-select: none;
+      }
+      .fact-nav span:hover {color: #3d342a; transform: scale(1.2);}
+
+      .content-section { display: none; }
+      .content-section.active { display: block; }
+
+      .sub-section {
+         background: #f0e9db;
+         padding: 28px 32px;
+         border-radius: 10px;
+         margin-bottom: 28px;
+         border-left: 5px solid #baa68b;
+      }
+      .sub-section h3 {
+         color: #3d342a;
+         margin-bottom: 22px;
+         font-size: 22px;
+         text-align: center;
+         letter-spacing: 0.6px;
+         padding-top: 4px;
+      }
+
+      .image-float-left {
+         float: left;
+         max-width: 220px;
+         width: 100%;
+         border-radius: 8px;
+         box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+         margin: 8px 24px 16px 0;
+         shape-outside: margin-box;
+      }
+
+      .image-float-right {
+         float: right;
+         max-width: 220px;
+         width: 100%;
+         border-radius: 8px;
+         box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+         margin: 8px 0 16px 24px;
+         shape-outside: margin-box;
+      }
+
+      .clearfix::after {
+         content: "";
+         display: table;
+         clear: both;
+      }
+
+      .caption {
+         text-align: center;
+         font-size: 13.5px;
+         color: #555;
+         margin-bottom: 10px;
+      }
+
+      .gallery-grid {
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         gap: 24px;
+      }
+      .gallery-item {
+         background: #f0e9db;
+         padding: 18px 18px 14px;
+         border-radius: 10px;
+         border: 1px solid #dacfc0;
+         box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+         text-align: center;
+         transition: transform 0.2s;
+      }
+      .gallery-item:hover {transform: translateY(-4px);}
+      .gallery-item img {
+         width: 100%;
+         border-radius: 6px;
+         box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+         margin-bottom: 10px;
+      }
+      .gallery-item .caption {
+         font-size: 13px;
+         color: #555;
+         margin: 0;
+      }
+
+      .quiz-container {
+         background: #f0e9db;
+         padding: 28px 32px;
+         border-radius: 10px;
+         margin-bottom: 28px;
+         border-left: 5px solid #baa68b;
+      }
+      .quiz-question {
+         font-size: 19px;
+         color: #3d342a;
+         margin-bottom: 20px;
+         text-align: center;
+         line-height: 1.6;
+      }
+      .quiz-options {
+         display: flex;
+         flex-direction: column;
+         gap: 12px;
+         margin-bottom: 20px;
+      }
+      .quiz-option {
+         background: #faf5ec;
+         padding: 14px 20px;
+         border-radius: 8px;
+         border: 1px solid #dacfc0;
+         cursor: pointer;
+         transition: all 0.2s;
+         font-size: 16px;
+         text-align: left;
+      }
+      .quiz-option:hover {
+         background: #e8e0d4;
+         border-color: #baa68b;
+      }
+      .quiz-option.selected {
+         background: #dcd3c7;
+         border-color: #a37c5b;
+         font-weight: bold;
+      }
+      .quiz-option.correct {
+         background: #c8d6b9;
+         border-color: #7a9a5c;
+      }
+      .quiz-option.wrong {
+         background: #e0c8c0;
+         border-color: #b5786a;
+      }
+      .quiz-feedback {
+         text-align: center;
+         font-size: 17px;
+         margin: 18px 0;
+         font-style: italic;
+         color: #3d342a;
+      }
+      .quiz-nav {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         margin-top: 18px;
+      }
+      .quiz-nav button {
+         padding: 10px 24px;
+         background: #a37c5b;
+         color: white;
+         border: none;
+         border-radius: 6px;
+         cursor: pointer;
+         font-size: 15px;
+         transition: 0.2s;
+      }
+      .quiz-nav button:hover {background: #8b6848;}
+      .quiz-nav button:disabled {
+         background: #ccc;
+         cursor: not-allowed;
+      }
+      .quiz-result {
+         text-align: center;
+         font-size: 20px;
+         color: #3d342a;
+         padding: 20px;
+      }
+
+      footer {
+         background: #e8e0d4;
+         padding: 35px 40px;
+         border-radius: 12px;
+         margin-top: 40px;
+         text-align: center;
+         border-top: 3px solid #bfa88d;
+      }
+      footer p { 
+         color: #4a4032; 
+         margin: 8px 0; 
+         font-size: 14.5px;
+      }
+      .decor { 
+         color: #a37c5b; 
+         font-size: 20px; 
+         margin: 12px 0;
+      }
+   </style>
+</head>
+<body>
+<div class="container">
+   <header>
+      <div class="logo">В.А. ЖУКОВСКИЙ</div>
+      <nav>
+         <a onclick="showSection('main')" class="active">Главная</a>
+         <a onclick="showSection('bio')">Биография</a>
+         <a onclick="showSection('poetry')">Поэзия</a>
+         <a onclick="showSection('translations')">Переводы</a>
+         <a onclick="showSection('gallery')">Галерея</a>
+      </nav>
+   </header>
+
+   <!-- Главная -->
+   <div id="main" class="content-section active">
+      <div class="hero">
+         <h1>Василий Андреевич Жуковский —<br>один из основоположников русского романтизма,<br>поэт, переводчик и литературный наставник</h1>
+      </div>
+
+      <div class="row">
+         <div class="card" onclick="showSection('pushkin')">
+            <h3>Жуковский и Пушкин</h3>
+            <p>Духовный наставник и старший друг Александра Пушкина. Именно Жуковский помог молодому поэту войти в большую литературу.</p>
+         </div>
+         <div class="card" onclick="showSection('tsar')">
+            <h3>Воспитатель императора</h3>
+            <p>Был наставником будущего царя Александра II. Оказал большое влияние на взгляды будущего реформатора.</p>
+         </div>
+         <div class="card" onclick="showSection('arzamas')">
+            <h3>Литературное общество «Арзамас»</h3>
+            <p>Основатель кружка, где воспитывал новое поколение русских литераторов и боролся с устаревшими правилами.</p>
+         </div>
+      </div>
+
+      <div class="section-block">
+         <h2>Наследие Жуковского</h2>
+         <p>Его произведения стали настоящим мостом между европейским романтизмом и русской поэзией. Жуковский обогатил наш язык новыми образами, мелодичностью и глубиной чувств.</p>
+      </div>
+
+      <div class="fact-block">
+         <h2>Интересные факты</h2>
+         <div class="facts-container" id="facts"></div>
+         <div class="fact-nav">
+            <span onclick="prevFact()">←</span>
+            <span onclick="nextFact()">→</span>
+         </div>
+      </div>
+
+      <!-- Викторина как кликабельный блок -->
+      <div class="quiz-clickable" onclick="showSection('quiz')">
+         <h2>Викторина по творчеству</h2>
+         <p>Проверьте, насколько хорошо вы знаете жизнь и произведения Василия Жуковского! Нажмите, чтобы начать.</p>
+      </div>
+
+      <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A26fba1f1093611a295fe7ee4ce5c2e217aff7648655db498149ccd92b50db4b2&amp;source=constructor" width="100%" height="300" frameborder="0"></iframe>
+
+      <div class="section-block">
+         <h2>Форма обратной связи</h2>
+         <form>
+            <input type="text" placeholder="Имя" style="width: 100%; padding: 10px; margin-bottom:12px;">
+            <input type="email" placeholder="Email" style="width: 100%; padding: 10px; margin-bottom:12px;">
+            <textarea placeholder="Ваше сообщение" rows="5" style="width: 100%; padding: 10px; margin-bottom:12px;"></textarea>
+            <button type="submit" style="padding: 12px 32px; background: #a37c5b; color: white; border: none; border-radius: 6px; cursor: pointer;">Отправить</button>
+         </form>
+      </div>
+   </div>
+
+   <!-- Биография -->
+   <div id="bio" class="content-section">
+      <div class="section-block">
+         <h2>Биография</h2>
+         
+         <div class="sub-section clearfix">
+            <h3>Происхождение и детские годы</h3>
+            <!-- ВСТАВЬТЕ СЮДА ССЫЛКУ НА ВАШЕ ИЗОБРАЖЕНИЕ -->
+            <img src="b1.jpg" alt="1" class="image-float-right">
+            <p>Василий Андреевич Жуковский родился 29 января (9 февраля по новому стилю) 1783 года в селе Мишенское Белёвского уезда Тульской губернии. Он был незаконнорожденным сыном богатого помещика Афанасия Ивановича Бунина и пленной турчанки Сальхи (в крещении — Елизаветы Дементьевны), захваченной во время русско-турецкой войны 1768–1774 годов. Мать умерла вскоре после родов. Отец не дал сыну свою фамилию, но обеспечил ему воспитание в своей семье. Фамилию «Жуковский» Василий получил от своего крёстного — бедного дворянина Андрея Жуковского.</p>
+            <p>С раннего детства мальчик проявлял исключительную мечтательность, любовь к чтению и природе. Он проводил много времени в библиотеке Буниных, где познакомился с произведениями русских и европейских авторов. Домашнее образование включало французский, немецкий, латынь и основы изящных искусств. Уже в юности Жуковский начал писать первые стихи и переводы.</p>
+         </div>
+
+         <div class="sub-section">
+            <h3>Образование и литературный дебют</h3>
+            <p>В 1797–1800 годах Жуковский учился в Московском университетском благородном пансионе, где получил блестящее образование. Среди его учителей были известные литераторы. В 1802 году в журнале «Вестник Европы» был опубликован его перевод элегии Томаса Грея «Сельское кладбище». Этот перевод стал настоящим событием в русской литературе и считается одним из первых произведений, открывших эпоху романтизма. С этого момента Жуковский активно сотрудничает с журналами, пишет оригинальные стихи и переводы, участвует в литературных спорах.</p>
+            <p>Он считал себя учеником Николая Карамзина и входил в кружок его последователей. В 1815 году стал членом литературного общества «Арзамас», где вместе с будущими декабристами и Пушкиным боролся против архаизмов и консервативных литературных норм.</p>
+         </div>
+
+         <div class="sub-section">
+            <h3>Отечественная война 1812 года и зрелость</h3>
+            <p>С началом войны с Наполеоном Жуковский вступил в московское ополчение и служил при штабе фельдмаршала Кутузова. Он участвовал в Бородинском сражении. В этот период было создано одно из самых известных его произведений — «Певец во стане русских воинов», которое мгновенно разлетелось по армии и стало символом патриотизма. Война глубоко повлияла на мировоззрение поэта, укрепив темы долга, чести, любви к Родине и трагизма человеческой судьбы.</p>
+         </div>
+
+         <div class="sub-section">
+            <h3>Придворная служба и воспитание наследника</h3>
+            <p>С 1815 года Жуковский занимал должность чтеца при императрице Марии Фёдоровне. В 1826 году император Николай I назначил его наставником великого князя Александра Николаевича — будущего императора Александра II. Более четырнадцати лет поэт занимался воспитанием наследника, прививая ему идеи гуманизма, просвещения и реформ. Многие историки отмечают, что влияние Жуковского сыграло важную роль в формировании реформаторских взглядов царя-освободителя.</p>
+            <p>Жуковский также стал автором слов государственного гимна Российской империи «Боже, Царя храни!» (1833, музыка А. Львова).</p>
+         </div>
+
+         <div class="sub-section">
+            <h3>Последние годы и наследие</h3>
+            <p>В 1841 году Жуковский вышел в отставку в чине тайного советника, женился на 20-летней Елизавете Рейтерн (дочери немецкого художника) и переехал в Германию. Там он продолжал активно переводить и писать. Умер 12 апреля 1852 года в Баден-Бадене. Первоначально похоронен там же, но в 1853 году прах поэта был перезахоронен в Александро-Невской лавре в Санкт-Петербурге.</p>
+            <p>Жуковский оставил после себя огромное литературное наследие, став мостом между русской и европейской культурой.</p>
+         </div>
+      </div>
+   </div>
+
+   <!-- Поэзия -->
+   <div id="poetry" class="content-section">
+      <div class="section-block">
+         <h2>Поэзия</h2>
+         
+         <div class="sub-section clearfix">
+            <h3>Жуковский — основоположник русского романтизма</h3>
+            <!-- ВСТАВЬТЕ СЮДА ССЫЛКУ НА ВАШЕ ИЗОБРАЖЕНИЕ -->
+            <img src="b2.jpg" alt="2" class="image-float-left">
+            <p>Василий Жуковский стал первым крупным русским поэтом, который решительно повернул литературу от классицизма к романтизму. Его поэзия сосредоточена на внутреннем мире человека, тонких душевных переживаниях, красоте природы, меланхолии, мечтах и загадочности бытия. Он учил читателя прислушиваться к голосу сердца и видеть поэтическое в повседневном.</p>
+            <p>Жуковский реформировал русский стих: ввёл амфибрахий, усовершенствовал гекзаметр, активно использовал белый стих. Его произведения отличаются исключительной музыкальностью — многие из них легко ложатся на музыку и стали романсами.</p>
+         </div>
+
+         <div class="sub-section">
+            <h3>Ключевые произведения и их значение</h3>
+            <ul style="margin-left:25px; line-height:1.95; font-size:16.2px;">
+               <li><strong>«Светлана» (1812)</strong> — вершина русской романтической баллады. Сочетание народных мотивов, гаданий, мистики и лирической грусти. Баллада оказала огромное влияние на Пушкина («Руслан и Людмила») и стала классикой.</li>
+               <li><strong>«Вечер» (1806)</strong> — одно из первых ярких романтических стихотворений в России, полное идиллических пейзажей и философских размышлений.</li>
+               <li><strong>«Море» (1822)</strong> — философская элегия, где море становится символом человеческой души, бурь страстей и вечности.</li>
+               <li><strong>«Певец во стане русских воинов» (1812)</strong> — патриотический шедевр, созданный во время войны 1812 года.</li>
+               <li>Другие баллады: «Лесной царь», «Кассандра», «Спящая царевна», «Эолова арфа» и многие другие.</li>
+            </ul>
+         </div>
+
+         <div class="sub-section">
+            <h3>Влияние на русскую литературу</h3>
+            <p>Жуковский стал литературным наставником А.С. Пушкина, которого он крестил и поддерживал на протяжении всей жизни. Его поэзия повлияла на Лермонтова, Тютчева, Фета и целое поколение русских романтиков. Без Жуковского развитие русской лирики XIX века было бы невозможно.</p>
+         </div>
+      </div>
+   </div>
+
+   <!-- Переводы -->
+   <div id="translations" class="content-section">
+      <div class="section-block">
+         <h2>Переводы</h2>
+         
+         <div class="sub-section clearfix">
+            <h3>Значение переводческой деятельности Жуковского</h3>
+            <!-- ВСТАВЬТЕ СЮДА ССЫЛКУ НА ВАШЕ ИЗОБРАЖЕНИЕ -->
+            <img src="b3.jpg" alt="3" class="image-float-right">
+            <p>Переводы занимали огромное место в жизни и творчестве Василия Андреевича Жуковского. Он перевёл на русский язык более двухсот произведений европейских авторов. Благодаря его трудам русская литература получила доступ к шедеврам античности, немецкого, английского и французского романтизма. Многие его переводы по художественной силе и поэтическому звучанию не уступали, а иногда даже превосходили оригиналы и стали неотъемлемой частью русской культуры.</p>
+         </div>
+
+         <div class="sub-section">
+            <h3>Главные переводы и их влияние</h3>
+            <ul style="margin-left:25px; line-height:1.95; font-size:16.2px;">
+               <li><strong>«Одиссея» Гомера</strong> — один из самых значимых трудов Жуковского. Этот перевод долгое время считался лучшим на русском языке и использовался в гимназиях и университетах на протяжении десятилетий. Жуковский работал над ним многие годы, стремясь передать эпическую мощь и красоту оригинала.</li>
+               <li>Баллады и драмы <strong>Фридриха Шиллера</strong>: «Лесной царь», «Кассандра», «Орлеанская дева», «Ивиковы журавли» и другие. Именно благодаря Жуковскому Шиллер стал очень популярен в России.</li>
+               <li><strong>«Ленора»</strong> Готфрида Бюргера — знаменитая баллада, которая оказала сильнейшее влияние на развитие русского романтизма и вдохновила многих поэтов.</li>
+               <li><strong>«Шильонский узник»</strong> Джорджа Байрона — яркий пример передачи романтического духа и свободы.</li>
+               <li>Сказки братьев Гримм, произведения Гёте, Уланда, Мура и многих других европейских авторов.</li>
+            </ul>
+         </div>
+
+         <div class="sub-section">
+            <h3>Переводческий метод и новаторство</h3>
+            <p>Жуковский не стремился к буквальному, дословному переводу. Он считал, что главное — передать дух, настроение и поэтическую красоту оригинала. Поэт адаптировал текст под русский язык и читательское восприятие, сохраняя при этом глубину и эмоциональную силу произведения. Александр Пушкин высоко ценил этот подход и говорил, что Жуковский «перевёл» всю европейскую поэзию на русский язык, сделав её родной для нас.</p>
+         </div>
+
+         <div class="sub-section">
+            <h3>Роль переводов в русской литературе</h3>
+            <p>Благодаря Жуковскому русский читатель познакомился с лучшими образцами мировой литературы. Его переводы обогатили русский поэтический язык новыми образами, ритмами и стилистическими приёмами. Они стали мостом между русской и европейской культурой и оказали огромное влияние на развитие всей русской литературы XIX века. Без переводческой деятельности Жуковского невозможно представить себе творчество Пушкина, Лермонтова, Тютчева и многих других классиков.</p>
+         </div>
+      </div>
+   </div>
+
+   <!-- Галерея -->
+   <div id="gallery" class="content-section">
+      <div class="section-block">
+         <h2>Галерея</h2>
+         <div class="gallery-grid">
+            <!-- ВСТАВЬТЕ СЮДА ССЫЛКИ НА ВАШИ 10 ИЗОБРАЖЕНИЙ -->
+            <div class="gallery-item">
+               <img src="g1.jpg" alt="1">
+               <div class="caption">Жуковксий (1)</div>
+            </div>
+            <div class="gallery-item">
+               <img src="g2.jpg" alt="2">
+               <div class="caption">Жуковский (2)</div>
+            </div>
+            <div class="gallery-item">
+               <img src="g3.jpg" alt="3">
+               <div class="caption">Жуковский (3)</div>
+            </div>
+            <div class="gallery-item">
+               <img src="g4.jpg" alt="4">
+               <div class="caption">Крылов, Пушкин, Жуковский, Гнедич</div>
+            </div>
+            <div class="gallery-item">
+               <img src="g5.jpg" alt="5">
+               <div class="caption">Проспект Римского-Корсакова, 43</div>
+            </div>
+            <div class="gallery-item">
+               <img src="g6.jpg" alt="6">
+               <div class="caption">Субботнее собрание</div>
+            </div>
+            <div class="gallery-item">
+               <img src="g7.jpg" alt="7">
+               <div class="caption">Рисунок Жуковского (1)</div>
+            </div>
+            <div class="gallery-item">
+               <img src="g8.jpg" alt="8">
+               <div class="caption">Рисунок Жуковского (2)</div>
+            </div>
+            <div class="gallery-item">
+               <img src="g9.jpg" alt="9">
+               <div class="caption">Рисунок Жуковского (3)</div>
+            </div>
+            <div class="gallery-item">
+               <img src="g10.jpg" alt="10">
+               <div class="caption">Жуковский (4)</div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Жуковский и Пушкин -->
+   <div id="pushkin" class="content-section">
+      <div class="section-block">
+         <h2>Жуковский и Пушкин</h2>
+         
+         <div class="sub-section clearfix">
+            <h3>Наставник и друг</h3>
+            <!-- ВСТАВЬТЕ СЮДА ССЫЛКУ НА ВАШЕ ИЗОБРАЖЕНИЕ -->
+            <img src="push.jpg" alt="1" class="image-float-right">
+            <p>Василий Жуковский сыграл огромную роль в судьбе Александра Сергеевича Пушкина. Их знакомство состоялось в 1815 году, когда юный Пушкин ещё учился в Царскосельском лицее. Жуковский сразу разглядел в нём гениального поэта и стал его литературным наставником, старшим другом и защитником. Он одним из первых высоко оценил дарование Пушкина и всячески способствовал его вхождению в большую литературу.</p>
+            <p>Именно Жуковский подарил Пушкину свой портрет с знаменитой надписью: «Победителю-ученику от побеждённого учителя» — после того как молодой поэт закончил поэму «Руслан и Людмила». Этот жест стал символом признания таланта Пушкина и их особых отношений.</p>
+            <p>Жуковский не раз выступал посредником между Пушкиным и властями, смягчал гнев императора, помогал в трудные минуты. Он был рядом с поэтом в последние дни его жизни после роковой дуэли и оставил трогательные воспоминания о прощании с другом.</p>
+         </div>
+
+         <div class="sub-section">
+            <h3>Творческое влияние</h3>
+            <p>Пушкин считал Жуковского своим учителем и многому научился у него. Жуковский передал Пушкину интерес к балладе, романтической поэзии, музыкальности стиха. Ранние произведения Пушкина носят явный отпечаток влияния Жуковского. Однако со временем Пушкин превзошёл учителя, что Жуковский признал с искренней радостью и гордостью.</p>
+            <p>Их переписка — ценнейший памятник русской литературы. В письмах они обсуждали творчество, делились замыслами, спорили о литературе. Жуковский поддерживал Пушкина в работе над «Борисом Годуновым», «Евгением Онегиным» и другими произведениями.</p>
+         </div>
+
+         <div class="sub-section">
+            <h3>Спасение от ссылки</h3>
+            <p>В 1820 году, когда над Пушкиным нависла угроза ссылки за вольнолюбивые стихи, Жуковский вместе с Карамзиным и другими влиятельными лицами ходатайствовал перед императором Александром I о смягчении наказания. Благодаря этим усилиям вместо Сибири Пушкин был отправлен в южную ссылку — в Кишинёв, а затем в Одессу.</p>
+            <p>Позже Жуковский помогал Пушкину вернуться из михайловской ссылки, способствовал его примирению с Николаем I. Поэт всегда помнил об этом и был глубоко благодарен своему наставнику.</p>
+         </div>
+      </div>
+   </div>
+
+   <!-- Воспитатель императора -->
+   <div id="tsar" class="content-section">
+      <div class="section-block">
+         <h2>Воспитатель императора</h2>
+         
+         <div class="sub-section clearfix">
+            <h3>Наставник будущего царя</h3>
+            <!-- ВСТАВЬТЕ СЮДА ССЫЛКУ НА ВАШЕ ИЗОБРАЖЕНИЕ -->
+            <img src="imp.jpg" alt="2" class="image-float-left">
+            <p>В 1826 году император Николай I назначил Василия Жуковского наставником своего сына — великого князя Александра Николаевича, будущего императора Александра II. Это назначение стало одним из важнейших событий в жизни поэта. Более четырнадцати лет он посвятил воспитанию наследника престола, стремясь вырастить из него просвещённого и гуманного правителя.</p>
+            <p>Жуковский разработал специальную программу обучения, которая включала не только традиционные предметы, но и формирование нравственных качеств, любви к Отечеству, уважения к закону и справедливости. Он считал, что главная цель воспитания — «образование для добродетели».</p>
+            <p>Поэт лично проводил занятия, читал наследнику произведения русской и мировой литературы, прививал интерес к истории и культуре. Он старался воспитать в будущем царе человечность и милосердие.</p>
+         </div>
+
+         <div class="sub-section">
+            <h3>Путешествие по России и Европе</h3>
+            <p>В 1837 году Жуковский сопровождал цесаревича Александра в большом путешествии по России — первом в истории знакомстве наследника с собственной страной. Они посетили десятки губерний, городов и сёл. Эта поездка произвела сильное впечатление на будущего императора и во многом определила его реформаторские устремления.</p>
+            <p>Позже Жуковский сопровождал Александра в путешествии по Европе. Наследник знакомился с государственным устройством разных стран, встречался с выдающимися людьми. В Дармштадте произошла судьбоносная встреча — Александр увидел принцессу Марию Гессенскую, которая стала его женой.</p>
+         </div>
+
+         <div class="sub-section">
+            <h3>Влияние на реформы</h3>
+            <p>Многие историки сходятся во мнении, что именно Жуковский заложил основы того мировоззрения, которое позже привело Александра II к великим реформам. Отмена крепостного права в 1861 году, судебная, земская и военная реформы — всё это, в значительной степени, стало результатом воспитания, полученного императором в юности от Жуковского.</p>
+            <p>Сам Жуковский не дожил до этих преобразований — он умер в 1852 году. Но его идеи жили в его ученике. Александр II до конца жизни с теплотой вспоминал своего наставника и говорил, что всем лучшим в себе он обязан Жуковскому.</p>
+         </div>
+      </div>
+   </div>
+
+   <!-- Литературное общество «Арзамас» -->
+   <div id="arzamas" class="content-section">
+      <div class="section-block">
+         <h2>Литературное общество «Арзамас»</h2>
+         
+         <div class="sub-section clearfix">
+            <h3>Рождение «Арзамаса»</h3>
+            <!-- ВСТАВЬТЕ СЮДА ССЫЛКУ НА ВАШЕ ИЗОБРАЖЕНИЕ -->
+            <img src="arams.jpg" alt="3" class="image-float-right">
+            <p>Литературное общество «Арзамас» возникло в 1815 году как объединение молодых писателей, выступавших за обновление русской литературы. Название кружка было шутливым — оно отсылало к городу Арзамасу, известному своими гусями, что пародировало напыщенность литературных староверов. Жуковский стал одним из главных вдохновителей и основателей общества.</p>
+            <p>«Арзамас» противостоял литературному обществу «Беседа любителей русского слова», которое возглавлял адмирал Шишков. «Беседа» отстаивала архаичные языковые нормы и сопротивлялась проникновению новых форм в литературу. «Арзамасцы» же боролись за свободу творчества, демократизацию языка и развитие новых жанров.</p>
+            <p>Каждый член общества получал шутливое прозвище из баллад Жуковского. Сам Жуковский носил имя «Светлана». Среди арзамасцев были А.С. Пушкин, П.А. Вяземский, Д.В. Давыдов, К.Н. Батюшков и другие выдающиеся литераторы эпохи.</p>
+         </div>
+
+         <div class="sub-section">
+            <h3>Идеи и принципы</h3>
+            <p>Главной задачей «Арзамаса» была борьба с литературным староверством и защита нового литературного вкуса. Члены общества выступали за сближение литературного языка с живой разговорной речью, за освоение европейских жанров и тем, за иронию и остроумие в литературе.</p>
+            <p>Заседания «Арзамаса» проходили в непринуждённой, весёлой атмосфере. Арзамасцы писали шутливые протоколы, эпиграммы, пародии на своих противников. Но за этой игровой формой скрывалась серьёзная литературная борьба. Благодаря деятельности общества в русской литературе утвердились принципы романтизма и карамзинской реформы языка.</p>
+         </div>
+
+         <div class="sub-section">
+            <h3>Наследие «Арзамаса»</h3>
+            <p>Хотя общество просуществовало всего около трёх лет, его влияние на русскую культуру оказалось огромным. «Арзамас» стал настоящей кузницей кадров для русской литературы. Именно здесь формировались вкусы и принципы, которые позже определили развитие всей русской литературы XIX века.</p>
+            <p>Из кружка вышли реформаторы русского языка и литературы, создатели новых жанров и направлений. «Арзамас» подготовил почву для расцвета русской поэзии, который наступил в 1820–1830-е годы. Жуковский играл в этом процессе одну из ключевых ролей, объединяя вокруг себя молодых талантливых литераторов.</p>
+         </div>
+      </div>
+   </div>
+
+   <!-- Викторина -->
+   <div id="quiz" class="content-section">
+      <div class="section-block">
+         <h2>Викторина по творчеству</h2>
+         <div id="quizContainer" class="quiz-container">
+            <div class="quiz-question" id="quizQuestion"></div>
+            <div class="quiz-options" id="quizOptions"></div>
+            <div class="quiz-feedback" id="quizFeedback"></div>
+            <div class="quiz-nav">
+               <button id="quizPrevBtn" onclick="prevQuiz()" disabled>← Назад</button>
+               <span id="quizProgress"></span>
+               <button id="quizNextBtn" onclick="nextQuiz()">Далее →</button>
+            </div>
+         </div>
+         <div id="quizResult" class="quiz-result" style="display: none;"></div>
+      </div>
+   </div>
+
+      <footer>
+      <p>© 2026 Сайт посвящён творчеству Василия Андреевича Жуковского</p>
+      <p><strong>Создано студентом:</strong> Череповецкого Государственного Университета</p>
+      <p><strong>Институт:</strong> информационных технологий</p>
+      <p><strong>Специальность:</strong> "Программная инженерия"</p>
+      <p><strong>Группа:</strong> 1ПИб-02-2оп-25</p>
+      <p>Зайцев Михаил</p>
+      <p>Под руководством Сальниковой Ольги Сергеевны</p>
+   </footer>
+</div>
+
+<script>
+   const facts = [
+      "Жуковский был незаконнорожденным сыном помещика и пленной турчанки.",
+      "В 11 лет он уже писал первые драматические произведения.",
+      "Стал крёстным отцом Александра Пушкина.",
+      "Участвовал в Бородинском сражении в 1812 году.",
+      "Был воспитателем будущего императора Александра II.",
+      "Основал литературное общество «Арзамас».",
+      "Первым широко использовал амфибрахий в русской поэзии.",
+      "Перевёл «Одиссею» Гомера на русский язык.",
+      "Последние годы жизни провёл в Баден-Бадене.",
+      "Автор слов первого официального гимна России."
+   ];
+
+   let currentFact = 0;
+   const factsContainer = document.getElementById('facts');
+
+   function showFact() {
+      factsContainer.innerHTML = `<div class="fact-item active"><p>${facts[currentFact]}</p></div>`;
+   }
+
+   window.nextFact = function() {
+      currentFact = (currentFact + 1) % facts.length;
+      showFact();
+   }
+
+   window.prevFact = function() {
+      currentFact = (currentFact - 1 + facts.length) % facts.length;
+      showFact();
+   }
+
+   // Викторина
+   const quizData = [
+      {
+         question: "В каком году родился Василий Андреевич Жуковский?",
+         options: ["1779", "1783", "1787", "1791"],
+         correct: 1
+      },
+      {
+         question: "Кто был отцом Жуковского?",
+         options: ["Князь Голицын", "Помещик Афанасий Бунин", "Граф Шереметев", "Адмирал Шишков"],
+         correct: 1
+      },
+      {
+         question: "Какой перевод принёс Жуковскому первую известность?",
+         options: ["«Одиссея» Гомера", "«Ленора» Бюргера", "«Сельское кладбище» Томаса Грея", "«Шильонский узник» Байрона"],
+         correct: 2
+      },
+      {
+         question: "В каком сражении участвовал Жуковский в 1812 году?",
+         options: ["Аустерлицкое", "Бородинское", "Ватерлоо", "Смоленское"],
+         correct: 1
+      },
+      {
+         question: "Кто называл Жуковского «побеждённым учителем»?",
+         options: ["Лермонтов", "Пушкин", "Гоголь", "Сам Жуковский"],
+         correct: 3
+      },
+      {
+         question: "Наследником какого императора был воспитанник Жуковского?",
+         options: ["Александра I", "Николая I", "Александра II", "Николая II"],
+         correct: 1
+      },
+      {
+         question: "Какое прозвище носил Жуковский в обществе «Арзамас»?",
+         options: ["Эолова арфа", "Светлана", "Лесной царь", "Кассандра"],
+         correct: 1
+      },
+      {
+         question: "Какое произведение НЕ принадлежит Жуковскому?",
+         options: ["«Светлана»", "«Море»", "«Демон»", "«Вечер»"],
+         correct: 2
+      },
+      {
+         question: "Где провёл последние годы жизни Жуковский?",
+         options: ["В Москве", "В Петербурге", "В Баден-Бадене", "В Париже"],
+         correct: 2
+      },
+      {
+         question: "Автором слов какого гимна стал Жуковский?",
+         options: ["«Боже, Царя храни!»", "«Гром победы, раздавайся!»", "«Марсельеза»", "«Интернационал»"],
+         correct: 0
+      }
+   ];
+
+   let currentQuiz = 0;
+   let score = 0;
+   let answered = false;
+   let selectedOption = -1;
+
+   function loadQuiz() {
+      answered = false;
+      selectedOption = -1;
+      const quiz = quizData[currentQuiz];
+      document.getElementById('quizQuestion').textContent = `Вопрос ${currentQuiz + 1} из 10: ${quiz.question}`;
+      
+      let optionsHtml = '';
+      quiz.options.forEach((opt, index) => {
+         optionsHtml += `<div class="quiz-option" onclick="selectAnswer(${index})" id="opt${index}">${opt}</div>`;
+      });
+      document.getElementById('quizOptions').innerHTML = optionsHtml;
+      document.getElementById('quizFeedback').textContent = '';
+      document.getElementById('quizResult').style.display = 'none';
+      document.getElementById('quizContainer').style.display = 'block';
+      
+      document.getElementById('quizPrevBtn').disabled = currentQuiz === 0;
+      document.getElementById('quizNextBtn').textContent = currentQuiz === quizData.length - 1 ? 'Завершить' : 'Далее →';
+      document.getElementById('quizNextBtn').disabled = true;
+      document.getElementById('quizProgress').textContent = '';
+   }
+
+   window.selectAnswer = function(index) {
+      if (answered) return;
+      answered = true;
+      selectedOption = index;
+      
+      document.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+      document.getElementById('opt' + index).classList.add('selected');
+      
+      const quiz = quizData[currentQuiz];
+      if (index === quiz.correct) {
+         score++;
+         document.getElementById('quizFeedback').textContent = '✓ Правильно!';
+         document.getElementById('quizFeedback').style.color = '#5a7a3c';
+      } else {
+         document.getElementById('quizFeedback').textContent = '✗ Неверно. Правильный ответ выделен.';
+         document.getElementById('quizFeedback').style.color = '#a34a3c';
+         document.getElementById('opt' + quiz.correct).classList.add('correct');
+      }
+      
+      document.getElementById('quizNextBtn').disabled = false;
+   }
+
+   window.nextQuiz = function() {
+      if (currentQuiz < quizData.length - 1) {
+         currentQuiz++;
+         loadQuiz();
+      } else {
+         showQuizResult();
+      }
+   }
+
+   window.prevQuiz = function() {
+      if (currentQuiz > 0) {
+         currentQuiz--;
+         loadQuiz();
+      }
+   }
+
+   function showQuizResult() {
+      document.getElementById('quizContainer').style.display = 'none';
+      const resultDiv = document.getElementById('quizResult');
+      resultDiv.style.display = 'block';
+      resultDiv.innerHTML = `
+         <h3>Результат викторины</h3>
+         <p style="font-size: 22px; margin: 16px 0;">Вы ответили правильно на <strong>${score}</strong> из <strong>${quizData.length}</strong> вопросов</p>
+         <button onclick="restartQuiz()" style="padding: 10px 24px; background: #a37c5b; color: white; border: none; border-radius: 6px; cursor: pointer; margin-top: 12px;">Пройти заново</button>
+      `;
+   }
+
+   window.restartQuiz = function() {
+      currentQuiz = 0;
+      score = 0;
+      loadQuiz();
+   }
+
+   function showSection(section) {
+      document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(section).classList.add('active');
+      
+      document.querySelectorAll('nav a').forEach(link => {
+         link.classList.remove('active');
+         if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(section)) link.classList.add('active');
+      });
+
+      if (section === 'quiz') {
+         restartQuiz();
+      }
+   }
+
+   showFact();
+   loadQuiz();
+</script>
+</body>
+</html>
